@@ -22,6 +22,8 @@ func Main(f *tf.IntegrationFerry) error {
 		return err
 	}
 
+	// TODO: add handler here
+
 	err = f.Start()
 	if err != nil {
 		return err
