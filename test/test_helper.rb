@@ -44,11 +44,11 @@ class GhostferryTestCase < Minitest::Test
   include DbHelper
   include DataWriterHelper
 
-  MINIMAL_GHOSTFERRY = "integrationferry.go"
+  MINIMAL_GHOSTFERRY = "minimal_ghostferry"
 
   def new_ghostferry(filename, config: {})
     # Transform path to something ruby understands
-    path = File.join(GO_CODE_PATH, filename)
+    path = File.join(GO_CODE_PATH, filename, "main.go")
     g = Ghostferry.new(path, config: config, logger: @log_capturer.logger)
     @ghostferry_instances << g
     g

@@ -1,4 +1,4 @@
-package main
+package integrationferry
 
 import (
 	"encoding/json"
@@ -257,7 +257,7 @@ func NewStandardConfig() (*ghostferry.Config, error) {
 	return config, config.ValidateConfig()
 }
 
-func main() {
+func Setup() *IntegrationFerry {
 	logrus.SetFormatter(&logrus.JSONFormatter{})
 	logrus.SetLevel(logrus.DebugLevel)
 	if os.Getenv("CI") == "true" {
@@ -312,8 +312,5 @@ func main() {
 		DumpStateToStdoutOnError: true,
 	}
 
-	err = f.Main()
-	if err != nil {
-		panic(err)
-	}
+	return f
 }
