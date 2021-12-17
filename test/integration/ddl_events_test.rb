@@ -6,18 +6,24 @@ class DdlEventsTest < GhostferryTestCase
   def test_default_event_handler
     seed_simple_database_with_single_table
 
+    #datawriter = new_source_datawriter
+
     ghostferry = new_ghostferry(MINIMAL_GHOSTFERRY)
-    ghostferry.run
+
+    #start_datawriter_with_ghostferry(datawriter, ghostferry)
+    #stop_datawriter_during_cutover(datawriter, ghostferry)
+
+    ghostferry.run_with_logs()
 
     assert_ghostferry_completed(ghostferry, times: 1)
   end
 
   def test_ddl_event_handler
-    skip("skipping")
+    #skip("skipping")
     seed_simple_database_with_single_table
 
     ghostferry = new_ghostferry(DDL_GHOSTFERRY)
-    ghostferry.run
+    ghostferry.run_with_logs()
 
     assert_ghostferry_completed(ghostferry, times: 1)
   end
