@@ -15,7 +15,6 @@ type IntegrationTestCase struct {
 	T *testing.T
 
 	SetupAction                   func(*TestFerry, *sql.DB, *sql.DB)
-	AfterInitializeAction         func(*TestFerry, *sql.DB, *sql.DB)
 	AfterStartBinlogStreaming     func(*TestFerry, *sql.DB, *sql.DB)
 	AfterRowCopyIsComplete        func(*TestFerry, *sql.DB, *sql.DB)
 	BeforeStoppingBinlogStreaming func(*TestFerry, *sql.DB, *sql.DB)
@@ -59,7 +58,6 @@ func (this *IntegrationTestCase) Setup() {
 
 	this.callCustomAction(this.SetupAction)
 	PanicIfError(this.Ferry.Initialize())
-	this.callCustomAction(this.AfterInitializeAction)
 }
 
 func (this *IntegrationTestCase) StartFerryAndDataWriter() {
