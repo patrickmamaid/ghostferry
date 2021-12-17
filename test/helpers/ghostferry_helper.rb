@@ -287,6 +287,7 @@ module GhostferryHelper
                 reads.delete(reader)
                 next
               end
+              puts "From ghostferry: #{line}"
 
               line.tr!("\n", '') # remove trailing newline
 
