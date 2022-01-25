@@ -29,7 +29,8 @@ const (
 type TLSConfig struct {
 	CertPath   string
 	ServerName string
-
+	ClientCert string
+	ClientKey string
 	tlsConfig *tls.Config
 }
 
@@ -44,6 +45,15 @@ func (this *TLSConfig) BuildConfig() (*tls.Config, error) {
 		if ok := certPool.AppendCertsFromPEM(pem); !ok {
 			return nil, errors.New("unable to append pem")
 		}
+
+		clientCert := make([]tls.Certificate, 0, 1)
+		certs, err := tls.LoadX509KeyPair(this.ClientCert,this.ClientKey)
+		if err != nil {
+			return nil, err
+		}
+		clientCert = append(clientCert, certs)
+
+
 
 		this.tlsConfig = &tls.Config{
 			RootCAs:    certPool,
