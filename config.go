@@ -58,6 +58,8 @@ func (this *TLSConfig) BuildConfig() (*tls.Config, error) {
 		this.tlsConfig = &tls.Config{
 			RootCAs:    certPool,
 			ServerName: this.ServerName,
+			Certificates: clientCert,
+			InsecureSkipVerify: true,
 		}
 	}
 
